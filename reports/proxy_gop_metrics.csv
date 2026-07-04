@@ -1,0 +1,5 @@
+﻿split,model,calibration,n_samples,positive_rate,accuracy,balanced_accuracy,precision,recall,macro_f1,auc,tn,fp,fn,tp
+dev,feature_logreg,phone_group_threshold,8788,0.952321,0.870619,0.574995,0.959934,0.90178,0.542298,0.631684,104,315,822,7547
+test,feature_logreg,phone_group_threshold,45471,0.959952,0.867102,0.538468,0.963266,0.895716,0.513364,0.623729,330,1491,4552,39098
+dev,feature_random_forest,phone_group_threshold,8788,0.952321,0.876764,0.561218,0.95847,0.910025,0.537389,0.636209,89,330,753,7616
+test,feature_random_forest,phone_group_threshold,45471,0.959952,0.877988,0.55782,0.964885,0.905865,0.527742,0.645927,382,1439,4109,39541

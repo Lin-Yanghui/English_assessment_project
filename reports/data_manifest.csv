@@ -1,0 +1,4 @@
+﻿file,role,rows,dataset_sources,alignment_quality,train_rows,dev_rows,test_rows,gold_binary_0,gold_binary_1
+phones.csv,combined_source_table,114429,SpeechOcean762=94445; L2-ARCTIC-v5.0-Mandarin=19984,pass=90323; blank=19984; review=4122,47926,14117,52386,7786,106643
+phones_aligned.csv,primary_aligned_model_input,94445,SpeechOcean762=94445,pass=90323; review=4122,37937,9139,47369,4542,89903
+phones_aligned.csv,first_round_pass_only_training_input,90323,SpeechOcean762=90323,pass,36064,8788,45471,4143,86180

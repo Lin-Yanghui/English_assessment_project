@@ -1,0 +1,11 @@
+﻿rank,split,model,calibration,n_samples,accuracy,balanced_accuracy,precision,recall,macro_f1,auc,tn,fp,fn,tp,source_file
+1,dev,feature_random_forest,global_threshold,8788,0.522531,0.607616,0.971739,0.513562,0.397446,0.636208,294,125,4071,4298,reports\feature_baseline_metrics.csv
+2,dev,feature_logreg,global_threshold,8788,0.650888,0.593391,0.965408,0.656948,0.454139,0.631684,222,197,2871,5498,reports\feature_baseline_metrics.csv
+3,dev,feature_logreg,phone_group_threshold,8788,0.870619,0.574995,0.959934,0.90178,0.542298,0.631684,104,315,822,7547,reports\proxy_gop_metrics.csv
+4,dev,feature_random_forest,phone_group_threshold,8788,0.876764,0.561218,0.95847,0.910025,0.537389,0.636209,89,330,753,7616,reports\proxy_gop_metrics.csv
+5,dev,majority_class,majority_class,8788,0.952321,0.5,0.952321,1.0,0.487789,0.5,0,419,0,8369,reports\majority_baseline_metrics.csv
+1,test,feature_random_forest,global_threshold,45471,0.513118,0.604845,0.976181,0.505132,0.384813,0.645927,1283,538,21601,22049,reports\feature_baseline_metrics.csv
+2,test,feature_logreg,global_threshold,45471,0.643839,0.582945,0.969878,0.649141,0.440925,0.623729,941,880,15315,28335,reports\feature_baseline_metrics.csv
+3,test,feature_random_forest,phone_group_threshold,45471,0.877988,0.55782,0.964885,0.905865,0.527742,0.645927,382,1439,4109,39541,reports\proxy_gop_metrics.csv
+4,test,feature_logreg,phone_group_threshold,45471,0.867102,0.538468,0.963266,0.895716,0.513364,0.623729,330,1491,4552,39098,reports\proxy_gop_metrics.csv
+5,test,majority_class,majority_class,45471,0.959952,0.5,0.959952,1.0,0.489784,0.5,0,1821,0,43650,reports\majority_baseline_metrics.csv

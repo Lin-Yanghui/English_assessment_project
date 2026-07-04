@@ -1,0 +1,46 @@
+# IDE and editor files
+.idea/
+.vscode/
+*.iml
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Environment and local config
+.env
+.env.*
+!.env.example
+
+# Raw speech datasets
+BWC/
+LXC/
+NCC/
+TXHC/
+
+# Generated model artifacts
+models/
+*.joblib
+*.pkl
+*.pickle
+
+# Large generated prediction outputs
+reports/*_predictions.csv
+reports/proxy_gop_predictions.csv
+reports/feature_baseline_predictions.csv
+reports/majority_baseline_predictions.csv
+
+# Large source/intermediate CSV files
+phones.csv
+phones_aligned.csv
+
+# OS files
+.DS_Store
+Thumbs.db

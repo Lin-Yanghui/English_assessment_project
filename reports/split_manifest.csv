@@ -1,0 +1,4 @@
+﻿split,phone_rows,utterances,speakers,gold_binary_0,gold_binary_1,target_phones,alignment_quality
+dev,8788,500,25,419,8369,38,pass
+test,45471,2500,125,1821,43650,39,pass
+train,36064,2000,100,1903,34161,39,pass

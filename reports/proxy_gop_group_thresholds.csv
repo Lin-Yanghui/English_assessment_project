@@ -1,0 +1,15 @@
+﻿model,phone_group,threshold,dev_n_samples,dev_positive_rate,dev_balanced_accuracy,fallback_used
+feature_logreg,affricate,0.05,61,0.983607,0.495868,0
+feature_logreg,fricative,0.31,1477,0.966148,0.569338,0
+feature_logreg,glide,0.47,438,0.974886,0.590654,0
+feature_logreg,liquid,0.32,601,0.955075,0.58113,0
+feature_logreg,nasal,0.37,983,0.960326,0.528928,0
+feature_logreg,stop,0.49,1676,0.961814,0.516043,0
+feature_logreg,vowel,0.35,3552,0.936092,0.530111,0
+feature_random_forest,affricate,0.05,61,0.983607,0.495868,0
+feature_random_forest,fricative,0.33,1477,0.966148,0.559843,0
+feature_random_forest,glide,0.25,438,0.974886,0.626945,0
+feature_random_forest,liquid,0.26,601,0.955075,0.565202,0
+feature_random_forest,nasal,0.36,983,0.960326,0.539519,0
+feature_random_forest,stop,0.55,1676,0.961814,0.514283,0
+feature_random_forest,vowel,0.43,3552,0.936092,0.522047,0
