@@ -32,6 +32,9 @@ METRIC_FIELDS = [
     "precision",
     "recall",
     "macro_f1",
+    "error_precision",
+    "error_recall",
+    "error_f1",
     "auc",
     "tn",
     "fp",
@@ -88,6 +91,9 @@ def metrics_for_frame(
         "precision": round(precision_score(y_true, y_pred, zero_division=0), 6),
         "recall": round(recall_score(y_true, y_pred, zero_division=0), 6),
         "macro_f1": round(f1_score(y_true, y_pred, average="macro", zero_division=0), 6),
+        "error_precision": round(precision_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_recall": round(recall_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_f1": round(f1_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
         "auc": round(safe_auc(y_true, scores), 6),
         "tn": int(tn),
         "fp": int(fp),
@@ -158,15 +164,18 @@ def write_summary(path: Path, summary: pd.DataFrame) -> None:
         "",
         "The table below reports test-split performance for the current calibrated models.",
         "",
-        "| model | calibration | n | accuracy | balanced_accuracy | macro_f1 | auc | tn | fp | fn | tp |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| model | calibration | n | accuracy | balanced_accuracy | precision | recall | macro_f1 | error_precision | error_recall | error_f1 | auc | tn | fp | fn | tp |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for _, row in summary.iterrows():
         lines.append(
             "| "
             f"{row['model']} | {row['calibration']} | {int(row['n_samples'])} | "
             f"{row['accuracy']:.6f} | {row['balanced_accuracy']:.6f} | "
-            f"{row['macro_f1']:.6f} | {row['auc']:.6f} | "
+            f"{row['precision']:.6f} | {row['recall']:.6f} | "
+            f"{row['macro_f1']:.6f} | {row['error_precision']:.6f} | "
+            f"{row['error_recall']:.6f} | {row['error_f1']:.6f} | "
+            f"{row['auc']:.6f} | "
             f"{int(row['tn'])} | {int(row['fp'])} | {int(row['fn'])} | {int(row['tp'])} |"
         )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -1,0 +1,69 @@
+# Phase-1 model stack configuration.
+
+input: phones.csv
+alignment_quality: pass,blank
+random_state: 42
+
+baseline_models:
+  - majority_class
+  - feature_logreg
+  - feature_random_forest
+
+enhanced_models:
+  - enhanced_extra_trees
+  - enhanced_hist_gradient_boosting
+
+fusion_models:
+  - fusion_logreg
+  - fusion_random_forest
+  - acceptance_error_sgd
+  - acceptance_error_extra_trees
+
+ssl_models:
+  - ssl_phone_logreg
+
+upper_bound_models:
+  - teacher_score_rule
+
+thresholding:
+  objective: macro_f1
+  selected_on: dev
+  reported_on: test
+
+gop_models:
+  proxy:
+    scores: reports/proxy_gop_predictions.csv
+    metrics: reports/proxy_gop_metrics.csv
+  acoustic:
+    scores: reports/acoustic_gop_scores.csv
+    predictions: reports/acoustic_gop_predictions.csv
+    metrics: reports/acoustic_gop_metrics.csv
+    model: models/acoustic_gop_phone_nb.joblib
+  ssl_embeddings: reports/ssl_phone_embeddings.csv
+  teacher_score_rule:
+    predictions: reports/teacher_score_rule_predictions.csv
+    metrics: reports/teacher_score_rule_metrics.csv
+  combined:
+    input: phones.csv
+    alignment_quality: pass,blank
+    majority_metrics: reports/combined_majority_baseline_metrics.csv
+    feature_metrics: reports/combined_feature_baseline_metrics.csv
+    proxy_gop_metrics: reports/combined_proxy_gop_metrics.csv
+    enhanced_metrics: reports/combined_enhanced_model_metrics.csv
+    ssl_embeddings: reports/combined_ssl_phone_embeddings.csv
+    ssl_metrics: reports/combined_ssl_phone_classifier_metrics.csv
+    fusion_metrics: reports/combined_fusion_model_metrics.csv
+    acceptance_error_fusion_metrics: reports/combined_acceptance_error_fusion_metrics.csv
+    teacher_score_rule_metrics: reports/combined_teacher_score_rule_metrics.csv
+    plan_acceptance_threshold_metrics: reports/combined_plan_acceptance_threshold_metrics.csv
+    comparison: reports/combined_model_comparison.csv
+
+notes:
+  - The current combined main-model path uses `phones.csv` with `alignment_quality=pass,blank`, covering SpeechOcean762 pass rows and L2-ARCTIC rows while excluding SpeechOcean762 review rows.
+  - Enhanced models use deployable tabular fields only, avoiding human score leakage.
+  - Acoustic GOP uses a phone-posterior acoustic model trained from correct SSL phone-segment embeddings.
+  - Fusion models combine proxy GOP scores, calibrated thresholds, margins, duration, phone identity, phone group, and SSL phone-segment embeddings.
+  - Current fusion training uses train-split first-level proxy GOP predictions plus SSL embeddings.
+  - Acceptance error fusion directly predicts the error class, adds train-only smoothed phone/word priors, SSL features, feature-model scores, and selects thresholds under the plan precision constraint.
+  - SSL phone-segment classifier metrics are available in reports/ssl_phone_classifier_metrics.csv.
+  - teacher_score_rule uses source phone-level scores that labels are derived from; it is a numerical upper bound, not a deployable acoustic model.

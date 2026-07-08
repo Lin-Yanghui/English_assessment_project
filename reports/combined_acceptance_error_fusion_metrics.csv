@@ -1,0 +1,9 @@
+﻿split,model,calibration,n_samples,positive_rate,threshold,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc,tn,fp,fn,tp,meets_plan_minimum
+dev,acceptance_error_sgd,plan_global_threshold,13766,0.924379,0.99,0.896194,0.638228,0.945356,0.942161,0.635643,0.321033,0.334294,0.327529,0.770848,348,693,736,11989,0
+dev,acceptance_error_sgd,plan_phone_group_threshold,13766,0.924379,per_phone_group,0.884207,0.661733,0.949519,0.923851,0.63973,0.300361,0.399616,0.342951,0.770848,416,625,969,11756,0
+test,acceptance_error_sgd,plan_global_threshold,50488,0.950206,0.99,0.928637,0.580809,0.958179,0.967107,0.588057,0.236575,0.194511,0.213491,0.704907,489,2025,1578,46396,0
+test,acceptance_error_sgd,plan_phone_group_threshold,50488,0.950206,per_phone_group,0.913504,0.593766,0.95965,0.948868,0.584892,0.196528,0.238663,0.215556,0.704907,600,1914,2453,45521,0
+dev,acceptance_error_extra_trees,plan_global_threshold,13766,0.924379,0.77,0.913119,0.649147,0.946618,0.960157,0.661933,0.409779,0.338136,0.370526,0.814846,352,689,507,12218,0
+dev,acceptance_error_extra_trees,plan_phone_group_threshold,13766,0.924379,per_phone_group,0.81912,0.723991,0.963416,0.836071,0.616854,0.233933,0.611912,0.33847,0.814846,637,404,2086,10639,0
+test,acceptance_error_extra_trees,plan_global_threshold,50488,0.950206,0.77,0.946264,0.567846,0.956748,0.988119,0.593471,0.394261,0.147574,0.214761,0.787562,371,2143,570,47404,0
+test,acceptance_error_extra_trees,plan_phone_group_threshold,50488,0.950206,per_phone_group,0.88829,0.664365,0.967552,0.913057,0.604945,0.200345,0.415672,0.270375,0.787562,1045,1469,4171,43803,0

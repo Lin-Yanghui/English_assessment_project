@@ -1,0 +1,5 @@
+﻿split,model,calibration,n_samples,positive_rate,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc,tn,fp,fn,tp
+dev,ssl_phone_logreg,phone_group_threshold,8788,0.952321,0.903163,0.643093,0.966493,0.930577,0.603776,0.20411,0.355609,0.259356,0.786344,149,270,581,7788
+test,ssl_phone_logreg,phone_group_threshold,45471,0.959952,0.915595,0.602667,0.968399,0.942841,0.577432,0.16078,0.262493,0.199416,0.7382,478,1343,2495,41155
+dev,ssl_phone_logreg,target_phone_threshold,8788,0.952321,0.914087,0.668099,0.968842,0.940017,0.62982,0.248503,0.396181,0.305428,0.786344,166,253,502,7867
+test,ssl_phone_logreg,target_phone_threshold,45471,0.959952,0.91731,0.598824,0.968061,0.94504,0.576497,0.160895,0.252608,0.196581,0.7382,460,1361,2399,41251

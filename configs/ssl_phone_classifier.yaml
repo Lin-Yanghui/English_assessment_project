@@ -1,0 +1,38 @@
+# Self-supervised speech representation phone-segment classifier configuration.
+
+input: phones_aligned.csv
+dataset_source: SpeechOcean762
+alignment_quality: pass
+
+# Use a local HuggingFace model directory or a model id available to transformers.
+# Examples:
+# - facebook/wav2vec2-base
+# - facebook/hubert-base-ls960
+ssl_model_name_or_path: facebook/wav2vec2-base
+
+audio:
+  sample_rate: 16000
+  min_segment_ms: 40
+  max_segment_ms: 1200
+  path_remap:
+    data/raw/speechocean762/: speechocean762/
+    data/raw/L2-ARCTIC-v5.0/Mandarin/: ./
+
+embeddings:
+  output: reports/ssl_phone_embeddings.csv
+  pooling: mean
+  max_rows: null
+  batch_size: 1
+
+classifier:
+  output_metrics: reports/ssl_phone_classifier_metrics.csv
+  output_predictions: reports/ssl_phone_classifier_predictions.csv
+  model_dir: models
+  random_state: 42
+  model: logistic_regression
+
+comparison:
+  gop_metrics: reports/proxy_gop_metrics.csv
+  ssl_metrics: reports/ssl_phone_classifier_metrics.csv
+  output: reports/ssl_vs_gop_comparison.csv
+  summary_output: reports/ssl_vs_gop_comparison.md

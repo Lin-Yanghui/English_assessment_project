@@ -1,15 +1,16 @@
 ﻿requirement,status,evidence
-SpeechOcean phone-level aligned data,complete,phones_aligned.csv; reports/data_manifest.csv
+SpeechOcean and L2-ARCTIC phone-level data,complete,phones.csv; phones_aligned.csv; reports/data_manifest.csv; reports/dataset_manifest_by_source.csv
 speaker-level split manifest and leakage check,complete,reports/split_manifest.csv; reports/speaker_split_check.csv
 pass-only first-round training filter,complete,run_* scripts --alignment-quality pass; README.md
 majority-class baseline,complete,reports/majority_baseline_metrics.csv
-feature baseline classifier,complete,models/*.joblib; reports/feature_baseline_metrics.csv
-GOP or equivalent acoustic evidence baseline,partial,proxy_gop_score exists; true acoustic GOP is not implemented
-phone/phone-group threshold calibration,partial,reports/proxy_gop_group_thresholds.csv; target_phone thresholds not yet implemented
-self-supervised speech representation model,not_started,No wav2vec2/HuBERT/WavLM/XLS-R embedding pipeline yet
-fusion model,not_started,No GOP + SSL + tabular feature fusion model yet
+feature baseline classifier,complete,models/*.joblib; reports/feature_baseline_metrics.csv; reports/combined_feature_baseline_metrics.csv
+GOP or equivalent acoustic evidence baseline,complete,proxy GOP exists; acoustic GOP posterior scores are implemented in scripts/run_acoustic_gop_model.py and reports/acoustic_gop_scores.csv
+phone/phone-group threshold calibration,complete,reports/proxy_gop_group_thresholds.csv; reports/proxy_gop_target_phone_thresholds.csv; reports/acoustic_gop_group_thresholds.csv; reports/acoustic_gop_target_phone_thresholds.csv
+self-supervised speech representation model,complete,scripts/extract_ssl_phone_embeddings.py; scripts/run_ssl_phone_classifier.py; reports/ssl_phone_embeddings.csv; reports/combined_ssl_phone_embeddings.csv; reports/combined_ssl_phone_classifier_metrics.csv
+fusion model,complete,"scripts/run_fusion_model.py; scripts/run_acceptance_error_fusion_model.py; reports/fusion_model_metrics.csv; reports/combined_fusion_model_metrics.csv; reports/combined_acceptance_error_fusion_metrics.csv; combined fusion uses proxy GOP + tabular metadata + SSL embeddings; acceptance fusion directly optimizes error-class plan thresholds"
 formal metrics and confusion matrix,complete,reports/formal_eval_metrics.csv; reports/formal_eval_confusion_matrix.csv
 100 utterance prediction samples,complete,reports/prediction_samples_100_utterances.csv
 error analysis,complete,reports/error_analysis_summary.md; reports/error_cases.csv
 reproducibility materials,complete,README.md; requirements.txt; scripts/
-target model metrics,not_met,"Best current test BA=0.604845, Macro-F1=0.384813, AUC=0.645927"
+G6 minimum demo CLI,complete,"scripts/run_minimal_phone_demo.py; docs/g6_minimal_demo.md; reports/g6_minimal_demo_diagnosis.csv; command accepts --audio and --text and outputs a phone-level diagnosis table"
+target model metrics,partial,"combined teacher_score_rule reaches the numerical line with BA=1.000000, Macro-F1=1.000000, AUC=1.000000 and error P/R=1.000000; this is a source-score/label-reconstruction upper bound. Best combined deployable BA is acceptance_error_extra_trees plan_phone_group_threshold with BA=0.664365, Macro-F1=0.604945, AUC=0.787562, error precision=0.200345, error recall=0.415672; deployable models still miss the planned error precision/recall line"

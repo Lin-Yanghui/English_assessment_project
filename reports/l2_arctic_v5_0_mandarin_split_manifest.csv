@@ -1,0 +1,4 @@
+﻿dataset_source,split,phone_rows,utterances,speakers,gold_binary_0,gold_binary_1,target_phones,alignment_quality
+L2-ARCTIC-v5.0-Mandarin,dev,4978,150,1,622,4356,40,blank=4978
+L2-ARCTIC-v5.0-Mandarin,test,5017,150,1,693,4324,42,blank=5017
+L2-ARCTIC-v5.0-Mandarin,train,9989,300,2,1929,8060,41,blank=9989

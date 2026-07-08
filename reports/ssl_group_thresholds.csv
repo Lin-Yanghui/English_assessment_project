@@ -1,0 +1,8 @@
+﻿model,threshold_level,threshold_key,phone_group,target_phone,threshold,dev_n_samples,dev_positive_rate,dev_balanced_accuracy,fallback_used
+ssl_phone_logreg,phone_group,affricate,affricate,,0.05,61,0.983607,0.495868,0
+ssl_phone_logreg,phone_group,fricative,fricative,,0.22,1477,0.966148,0.566882,0
+ssl_phone_logreg,phone_group,glide,glide,,0.15,438,0.974886,0.643258,0
+ssl_phone_logreg,phone_group,liquid,liquid,,0.15,601,0.955075,0.587407,0
+ssl_phone_logreg,phone_group,nasal,nasal,,0.14,983,0.960326,0.585057,0
+ssl_phone_logreg,phone_group,stop,stop,,0.23,1676,0.961814,0.605785,0
+ssl_phone_logreg,phone_group,vowel,vowel,,0.23,3552,0.936092,0.610783,0

@@ -1,0 +1,5 @@
+﻿dataset_source,speaker_id,splits,num_splits,leakage,phone_rows,utterances,gold_binary_0,gold_binary_1
+L2-ARCTIC-v5.0-Mandarin,BWC,train,1,0,4991,150,946,4045
+L2-ARCTIC-v5.0-Mandarin,LXC,train,1,0,4998,150,983,4015
+L2-ARCTIC-v5.0-Mandarin,NCC,dev,1,0,4978,150,622,4356
+L2-ARCTIC-v5.0-Mandarin,TXHC,test,1,0,5017,150,693,4324

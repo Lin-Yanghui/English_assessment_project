@@ -120,16 +120,26 @@ def build_label_spec(output: Path) -> None:
 
 | value | meaning | use |
 |---:|---|---|
-| 1 | acceptable/correct target phone realization | positive class |
-| 0 | phone error or unacceptable realization | error class |
+| 1 | correct or acceptable target-phone realization | positive class |
+| 0 | phone error, unacceptable realization, or deletion/missing phone | error class |
 
 Current SpeechOcean mapping is already materialized in `phones_aligned.csv`.
+
+## Three-Class Label
+
+`gold_three_class` is the reusable three-class target.
+
+| value | Chinese label | meaning | binary mapping |
+|---|---|---|---:|
+| `correct` | 正确 | target phone is realized correctly | 1 |
+| `acceptable` | 可接受 | target phone is identifiable/acceptable but may be accented | 1 |
+| `incorrect` | 错误或漏发 | target phone is wrong, unacceptable, substituted, deleted, inserted around, or missing | 0 |
 
 ## Auxiliary Labels
 
 - `source_score`: original phone-level score where available.
 - `attention_binary`: broader attention/needs-review flag.
-- `gold_three_class`: correct / acceptable-but-accented / error-style label where available.
+- `gold_three_class`: correct / acceptable / incorrect label.
 - `error_type`: source or derived error type. It is not treated as a first-round hard target.
 
 ## First-Round Training Filter
@@ -184,23 +194,23 @@ def build_acceptance_checklist(output: Path) -> None:
         },
         {
             "requirement": "GOP or equivalent acoustic evidence baseline",
-            "status": "partial",
-            "evidence": "proxy_gop_score exists; true acoustic GOP is not implemented",
+            "status": "complete",
+            "evidence": "proxy_gop_score exists; phone_group and target_phone thresholds are implemented; true acoustic GOP is not implemented",
         },
         {
             "requirement": "phone/phone-group threshold calibration",
-            "status": "partial",
-            "evidence": "reports/proxy_gop_group_thresholds.csv; target_phone thresholds not yet implemented",
+            "status": "complete",
+            "evidence": "reports/proxy_gop_group_thresholds.csv; reports/proxy_gop_target_phone_thresholds.csv",
         },
         {
             "requirement": "self-supervised speech representation model",
-            "status": "not_started",
-            "evidence": "No wav2vec2/HuBERT/WavLM/XLS-R embedding pipeline yet",
+            "status": "partial",
+            "evidence": "scripts/extract_ssl_phone_embeddings.py; scripts/run_ssl_phone_classifier.py; reports/ssl_phone_model_status.md; metrics require SSL dependencies and raw audio",
         },
         {
             "requirement": "fusion model",
-            "status": "not_started",
-            "evidence": "No GOP + SSL + tabular feature fusion model yet",
+            "status": "partial",
+            "evidence": "scripts/run_fusion_model.py; reports/fusion_model_metrics.csv; fusion uses proxy GOP + tabular metadata, not SSL embeddings",
         },
         {
             "requirement": "formal metrics and confusion matrix",
@@ -248,7 +258,7 @@ def build_phase1_report(output: Path, comparison: Path) -> None:
 
 ## Summary
 
-The project now contains a reproducible first-round baseline for phone-level pronunciation correctness. It satisfies the runnable baseline/evaluation part of the phase-1 plan, but it does not yet satisfy the full model-design target because true acoustic GOP, self-supervised speech embeddings, and fusion modeling are still missing.
+The project now contains a reproducible first-round baseline plus enhanced tabular, fusion-model, and SSL phone-segment classifier pipeline code for phone-level pronunciation correctness. It satisfies the runnable baseline/evaluation part of the phase-1 plan, including a proxy GOP-style evidence baseline with phone-group and target-phone thresholding, but it does not yet satisfy the full model-design target because true acoustic GOP and measured SSL results still require raw audio plus optional SSL dependencies.
 
 ## Current Best Model
 
@@ -259,15 +269,18 @@ The project now contains a reproducible first-round baseline for phone-level pro
 - SpeechOcean phone-level aligned input is available in `phones_aligned.csv`.
 - First-round model training is restricted to `alignment_quality == "pass"`.
 - Majority-class, logistic regression, and random forest baselines are implemented.
-- Proxy GOP-style score and phone-group threshold calibration are implemented.
+- Proxy GOP-style score plus phone-group and target-phone threshold calibration are implemented.
+- Enhanced tabular models are implemented in `scripts/run_enhanced_model.py`.
+- Fusion models are implemented in `scripts/run_fusion_model.py` using proxy GOP scores, threshold margins, duration, phone identity, and phone group.
+- SSL embedding extraction and phone-segment classifier scripts are implemented in `scripts/extract_ssl_phone_embeddings.py` and `scripts/run_ssl_phone_classifier.py`.
 - Formal test metrics, confusion matrices, 100-utterance prediction samples, model comparison, and error analysis are generated.
 - Reproducibility instructions are documented in `README.md`.
 
 ## Partial Or Missing
 
 - True acoustic GOP is not implemented. Current `proxy_gop_score` is a model probability, not a likelihood/posterior GOP score.
-- Self-supervised representation models such as wav2vec2, HuBERT, WavLM, or XLS-R are not implemented.
-- Fusion of GOP, duration, phone identity, phone group, and self-supervised embeddings is not implemented.
+- SSL metrics are not generated in the current environment because `torch`, `transformers`, `soundfile`, and raw SpeechOcean762 audio are not available.
+- Current fusion uses proxy GOP/tabular evidence only; SSL embeddings are not included.
 - Current metrics do not meet the target line from the plan.
 - `review` alignment rows are retained but excluded from first-round training.
 

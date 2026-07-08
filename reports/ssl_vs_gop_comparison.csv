@@ -1,0 +1,15 @@
+﻿rank,split,model_family,model,calibration,n_samples,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc
+1,dev,ssl_phone_classifier,ssl_phone_logreg,global_threshold,8788,0.895767,0.641477,0.966454,0.922571,0.595975,0.188986,0.360382,0.247947,0.786344
+2,dev,proxy_gop,feature_logreg,target_phone_threshold,8788,0.883477,0.579479,0.960271,0.915522,0.551743,0.126082,0.243437,0.166124,0.631684
+3,dev,proxy_gop,feature_logreg,phone_group_threshold,8788,0.870619,0.574995,0.959934,0.90178,0.542298,0.112311,0.24821,0.154647,0.631684
+4,dev,proxy_gop,feature_random_forest,target_phone_threshold,8788,0.905894,0.567444,0.958871,0.94157,0.556972,0.142105,0.193317,0.163802,0.636209
+5,dev,proxy_gop,feature_random_forest,phone_group_threshold,8788,0.876764,0.561218,0.95847,0.910025,0.537389,0.105701,0.212411,0.141158,0.636209
+6,dev,acoustic_gop,acoustic_gop_phone_nb,phone_group_threshold,8788,0.18878,0.557079,0.988189,0.149958,0.181101,0.053738,0.9642,0.101802,0.576725
+7,dev,acoustic_gop,acoustic_gop_phone_nb,target_phone_threshold,8788,0.18878,0.557079,0.988189,0.149958,0.181101,0.053738,0.9642,0.101802,0.576725
+1,test,ssl_phone_classifier,ssl_phone_logreg,global_threshold,45471,0.91069,0.606427,0.968764,0.937182,0.575467,0.154747,0.275673,0.198223,0.7382
+2,test,proxy_gop,feature_random_forest,phone_group_threshold,45471,0.877988,0.55782,0.964885,0.905865,0.527742,0.085059,0.209775,0.121039,0.645927
+3,test,acoustic_gop,acoustic_gop_phone_nb,phone_group_threshold,45471,0.169559,0.539829,0.982784,0.13732,0.162142,0.043584,0.942339,0.083315,0.564236
+4,test,acoustic_gop,acoustic_gop_phone_nb,target_phone_threshold,45471,0.169559,0.539829,0.982784,0.13732,0.162142,0.043584,0.942339,0.083315,0.564236
+5,test,proxy_gop,feature_random_forest,target_phone_threshold,45471,0.903807,0.538641,0.963139,0.935601,0.527346,0.084066,0.14168,0.105521,0.645927
+6,test,proxy_gop,feature_logreg,phone_group_threshold,45471,0.867102,0.538468,0.963266,0.895716,0.513364,0.067595,0.181219,0.098463,0.623729
+7,test,proxy_gop,feature_logreg,target_phone_threshold,45471,0.875635,0.522389,0.961855,0.906392,0.507566,0.058091,0.138386,0.081831,0.623729

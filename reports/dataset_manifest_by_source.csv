@@ -1,0 +1,4 @@
+﻿dataset_source,table,rows,utterances,speakers,splits,alignment_quality,pass_rows,gold_binary_0,gold_binary_1,target_phones,audio_paths_existing,audio_paths_total,annotation_paths_existing,annotation_paths_total
+L2-ARCTIC-v5.0-Mandarin,phones.csv,19984,600,4,train=9989; test=5017; dev=4978,blank=19984,0,3244,16740,43,600,600,600,600
+SpeechOcean762,phones.csv,94445,5000,250,test=47369; train=37937; dev=9139,pass=90323; review=4122,90323,4542,89903,39,5000,5000,1,1
+SpeechOcean762,phones_aligned.csv,94445,5000,250,test=47369; train=37937; dev=9139,pass=90323; review=4122,90323,4542,89903,39,,,,

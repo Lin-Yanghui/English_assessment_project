@@ -39,12 +39,27 @@ METRIC_FIELDS = [
     "precision",
     "recall",
     "macro_f1",
+    "error_precision",
+    "error_recall",
+    "error_f1",
     "auc",
     "tn",
     "fp",
     "fn",
     "tp",
 ]
+
+
+def filter_alignment_quality(df: pd.DataFrame, alignment_quality: str) -> pd.DataFrame:
+    if alignment_quality.lower() == "all":
+        return df.copy()
+    if "alignment_quality" not in df.columns:
+        raise SystemExit("--alignment-quality was set, but input has no alignment_quality column.")
+    allowed = {
+        "" if item.strip().lower() in {"blank", "empty"} else item.strip().lower()
+        for item in alignment_quality.split(",")
+    }
+    return df[df["alignment_quality"].str.lower().isin(allowed)].copy()
 
 
 def build_preprocessor() -> ColumnTransformer:
@@ -139,6 +154,9 @@ def evaluate(
         "precision": round(precision_score(y_true, y_pred, zero_division=0), 6),
         "recall": round(recall_score(y_true, y_pred, zero_division=0), 6),
         "macro_f1": round(f1_score(y_true, y_pred, average="macro", zero_division=0), 6),
+        "error_precision": round(precision_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_recall": round(recall_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_f1": round(f1_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
         "auc": round(auc, 6),
         "tn": int(tn),
         "fp": int(fp),
@@ -191,15 +209,12 @@ def main() -> None:
     parser.add_argument(
         "--alignment-quality",
         default="pass",
-        help="Filter by alignment_quality. Use 'all' to disable filtering.",
+        help="Filter by alignment_quality. Use 'all' to disable filtering. Comma-separated values are supported; use 'blank' for empty values.",
     )
     args = parser.parse_args()
 
     df = pd.read_csv(args.input, encoding="utf-8-sig", keep_default_na=False, low_memory=False)
-    if args.alignment_quality.lower() != "all":
-        if "alignment_quality" not in df.columns:
-            raise SystemExit("--alignment-quality was set, but input has no alignment_quality column.")
-        df = df[df["alignment_quality"].str.lower() == args.alignment_quality.lower()].copy()
+    df = filter_alignment_quality(df, args.alignment_quality)
     if df.empty:
         raise SystemExit(
             f"No rows found after alignment_quality={args.alignment_quality!r} filtering."
@@ -229,6 +244,8 @@ def main() -> None:
                 evaluate(split_name, model_name, split_frame["gold_binary"], scores, threshold)
             )
             all_prediction_rows.extend(prediction_rows(split_frame, model_name, scores, threshold))
+        train_scores = positive_class_scores(model, train[NUMERIC_FEATURES + CATEGORICAL_FEATURES])
+        all_prediction_rows.extend(prediction_rows(train, model_name, train_scores, threshold))
 
         joblib.dump(model, args.model_dir / f"{model_name}.joblib")
 

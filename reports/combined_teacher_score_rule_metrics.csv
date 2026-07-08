@@ -1,0 +1,3 @@
+﻿split,model,n_samples,positive_rate,threshold,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc,tn,fp,fn,tp
+dev,teacher_score_rule,13766,0.924379,0.81,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1041,0,0,12725
+test,teacher_score_rule,50488,0.950206,0.81,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2514,0,0,47974

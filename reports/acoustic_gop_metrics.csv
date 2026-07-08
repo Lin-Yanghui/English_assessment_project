@@ -1,0 +1,5 @@
+﻿split,model,calibration,n_samples,positive_rate,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc,tn,fp,fn,tp
+dev,acoustic_gop_phone_nb,phone_group_threshold,8788,0.952321,0.18878,0.557079,0.988189,0.149958,0.181101,0.053738,0.9642,0.101802,0.576725,404,15,7114,1255
+test,acoustic_gop_phone_nb,phone_group_threshold,45471,0.959952,0.169559,0.539829,0.982784,0.13732,0.162142,0.043584,0.942339,0.083315,0.564236,1716,105,37656,5994
+dev,acoustic_gop_phone_nb,target_phone_threshold,8788,0.952321,0.18878,0.557079,0.988189,0.149958,0.181101,0.053738,0.9642,0.101802,0.576725,404,15,7114,1255
+test,acoustic_gop_phone_nb,target_phone_threshold,45471,0.959952,0.169559,0.539829,0.982784,0.13732,0.162142,0.043584,0.942339,0.083315,0.564236,1716,105,37656,5994

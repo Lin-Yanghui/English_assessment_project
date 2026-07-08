@@ -24,6 +24,8 @@ BWC/
 LXC/
 NCC/
 TXHC/
+speechocean762/
+data/raw/
 
 # Generated model artifacts
 models/
@@ -36,6 +38,9 @@ reports/*_predictions.csv
 reports/proxy_gop_predictions.csv
 reports/feature_baseline_predictions.csv
 reports/majority_baseline_predictions.csv
+reports/*_embeddings.csv
+reports/*embeddings*.csv
+reports/*_scores.csv
 
 # Large source/intermediate CSV files
 phones.csv
@@ -44,3 +49,6 @@ phones_aligned.csv
 # OS files
 .DS_Store
 Thumbs.db
+
+# Office temporary lock files
+~$*.docx

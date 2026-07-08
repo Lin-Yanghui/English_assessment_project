@@ -1,0 +1,3 @@
+﻿split,model,n_samples,positive_rate,predicted_class,accuracy,balanced_accuracy,precision,recall,macro_f1,error_precision,error_recall,error_f1,auc,tn,fp,fn,tp
+dev,majority_class,13766,0.924379,1,0.924379,0.5,0.924379,1.0,0.480352,0.0,0.0,0.0,0.5,0,1041,0,12725
+test,majority_class,50488,0.950206,1,0.950206,0.5,0.950206,1.0,0.487234,0.0,0.0,0.0,0.5,0,2514,0,47974

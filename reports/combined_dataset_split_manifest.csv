@@ -1,0 +1,7 @@
+﻿dataset_source,split,phone_rows,utterances,speakers,gold_binary_0,gold_binary_1,target_phones,alignment_quality
+L2-ARCTIC-v5.0-Mandarin,dev,4978,150,1,622,4356,40,blank=4978
+L2-ARCTIC-v5.0-Mandarin,test,5017,150,1,693,4324,42,blank=5017
+L2-ARCTIC-v5.0-Mandarin,train,9989,300,2,1929,8060,41,blank=9989
+SpeechOcean762,dev,9139,500,25,453,8686,38,pass=8788; review=351
+SpeechOcean762,test,47369,2500,125,1978,45391,39,pass=45471; review=1898
+SpeechOcean762,train,37937,2000,100,2111,35826,39,pass=36064; review=1873

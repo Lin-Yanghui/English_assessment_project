@@ -58,12 +58,46 @@ def main() -> None:
             "reports/feature_baseline_predictions.csv",
             "--thresholds-output",
             "reports/proxy_gop_group_thresholds.csv",
+            "--target-thresholds-output",
+            "reports/proxy_gop_target_phone_thresholds.csv",
+            "--all-thresholds-output",
+            "reports/proxy_gop_thresholds.csv",
             "--metrics-output",
             "reports/proxy_gop_metrics.csv",
             "--predictions-output",
             "reports/proxy_gop_predictions.csv",
             "--objective",
             "macro_f1",
+        ]
+    )
+    run(
+        [
+            py,
+            "scripts/run_enhanced_model.py",
+            "--input",
+            str(args.input),
+            "--alignment-quality",
+            args.alignment_quality,
+            "--metrics-output",
+            "reports/enhanced_model_metrics.csv",
+            "--predictions-output",
+            "reports/enhanced_model_predictions.csv",
+            "--model-dir",
+            "models",
+        ]
+    )
+    run(
+        [
+            py,
+            "scripts/run_fusion_model.py",
+            "--input",
+            "reports/proxy_gop_predictions.csv",
+            "--metrics-output",
+            "reports/fusion_model_metrics.csv",
+            "--predictions-output",
+            "reports/fusion_model_predictions.csv",
+            "--model-dir",
+            "models",
         ]
     )
     run(
@@ -130,6 +164,10 @@ def main() -> None:
             "reports/feature_baseline_metrics.csv",
             "--proxy-gop-metrics",
             "reports/proxy_gop_metrics.csv",
+            "--enhanced-metrics",
+            "reports/enhanced_model_metrics.csv",
+            "--fusion-metrics",
+            "reports/fusion_model_metrics.csv",
             "--output",
             "reports/model_comparison.csv",
             "--summary-output",

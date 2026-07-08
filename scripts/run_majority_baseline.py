@@ -29,6 +29,9 @@ METRIC_FIELDS = [
     "precision",
     "recall",
     "macro_f1",
+    "error_precision",
+    "error_recall",
+    "error_f1",
     "auc",
     "tn",
     "fp",
@@ -41,10 +44,14 @@ def read_rows(path: Path, alignment_quality: str) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as f:
         rows = list(csv.DictReader(f))
     if alignment_quality.lower() != "all":
+        allowed = {
+            "" if item.strip().lower() in {"blank", "empty"} else item.strip().lower()
+            for item in alignment_quality.split(",")
+        }
         rows = [
             row
             for row in rows
-            if row.get("alignment_quality", "").lower() == alignment_quality.lower()
+            if row.get("alignment_quality", "").lower() in allowed
         ]
     return rows
 
@@ -81,6 +88,9 @@ def evaluate_split(split: str, y_true: list[int], predicted_class: int) -> dict[
         "precision": round(precision_score(y_true, y_pred, zero_division=0), 6),
         "recall": round(recall_score(y_true, y_pred, zero_division=0), 6),
         "macro_f1": round(f1_score(y_true, y_pred, average="macro", zero_division=0), 6),
+        "error_precision": round(precision_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_recall": round(recall_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
+        "error_f1": round(f1_score(y_true, y_pred, pos_label=0, zero_division=0), 6),
         "auc": round(auc, 6),
         "tn": int(tn),
         "fp": int(fp),
@@ -127,7 +137,7 @@ def main() -> None:
     parser.add_argument(
         "--alignment-quality",
         default="pass",
-        help="Filter by alignment_quality. Use 'all' to disable filtering.",
+        help="Filter by alignment_quality. Use 'all' to disable filtering. Comma-separated values are supported; use 'blank' for empty values.",
     )
     args = parser.parse_args()
 
