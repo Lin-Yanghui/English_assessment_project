@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>音素发音诊断</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel">
+        <div class="brand-row">
+          <div>
+            <p class="eyebrow">Phone Diagnosis</p>
+            <h1>音素发音诊断</h1>
+          </div>
+          <div class="status-chip" id="modelStatus">模型接口</div>
+        </div>
+
+        <div class="prompt-strip" aria-label="Prompt presets">
+          <button class="prompt active" type="button" data-text="ability">ability</button>
+          <button class="prompt" type="button" data-text="very well">very well</button>
+          <button class="prompt" type="button" data-text="three red leaves">three red leaves</button>
+          <button class="prompt" type="button" data-text="she sees the blue bird">she sees the blue bird</button>
+        </div>
+
+        <label class="field-label" for="targetText">目标文本</label>
+        <textarea id="targetText" rows="2">ability</textarea>
+
+        <div class="recorder">
+          <canvas id="waveCanvas" width="880" height="180" aria-label="Audio waveform"></canvas>
+          <div class="recorder-actions">
+            <button class="icon-button primary" type="button" id="recordBtn" title="开始录音">
+              <span id="recordIcon">●</span>
+              <span id="recordText">录音</span>
+            </button>
+            <button class="icon-button" type="button" id="playBtn" title="播放录音" disabled>▶</button>
+            <label class="file-button" title="上传 WAV">
+              <input id="audioFile" type="file" accept=".wav,audio/wav,audio/wave" />
+              WAV
+            </label>
+            <button class="icon-button success" type="button" id="submitBtn" title="诊断" disabled>诊断</button>
+          </div>
+          <audio id="audioPreview" controls></audio>
+        </div>
+      </section>
+
+      <section class="result-panel">
+        <div class="summary-grid">
+          <div class="metric">
+            <span>音素数</span>
+            <strong id="phoneCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>可接受</span>
+            <strong id="okCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>需复核</span>
+            <strong id="reviewCount">0</strong>
+          </div>
+        </div>
+
+        <div class="phone-timeline" id="phoneTimeline"></div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Word</th>
+                <th>Phone</th>
+                <th>Group</th>
+                <th>Time</th>
+                <th>Result</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody id="resultBody">
+              <tr>
+                <td colspan="7" class="empty">等待录音或上传音频</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
